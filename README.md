@@ -15,8 +15,8 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
 
 
 ## 整体结构目录
-
 |-- docker
+
     |-- compose
     |   |-- dev
     |   |   |-- nginx-fpm-swoole-mysql-redis
@@ -38,3 +38,31 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
     |   |-- data
     |   |   |-- mysql中对应的库、表文件
     |-- nginx
+    |   |-- conf.d
+    |   |   |-- fpm
+    |   |   |   |-- default.conf
+    |   |   |-- swoole
+    |   |   |   |-- default.conf
+    |   |-- logs
+    |   |-- nginx.conf
+    |-- php
+    |   |-- logs
+    |   |-- php-fpm.conf
+    |   |-- php-fpm.d
+    |   |   |-- docker.conf
+    |   |   |-- www.conf
+    |   |   |-- zz-docker.conf
+    |-- redis
+    |   |-- conf
+    |   |   |-- redis.conf
+    |   |-- data
+    |-- work
+    |   |-- fpm
+    |   |   |-- 50x.html
+    |   |   |-- index.html
+    |   |   |-- phpinfo.php
+    |   |-- swoole
+    |   |   |-- html
+    |   |   |   |-- 50x.html
+    |   |   |   |-- index.html
+    |   |   |-- server.php
