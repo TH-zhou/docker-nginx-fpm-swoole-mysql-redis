@@ -37,4 +37,4 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
     |   |   |   |-- mysqld.cnf
     |   |-- data
     |   |   |-- mysql中对应的库、表文件
-    
+    |-- nginx
