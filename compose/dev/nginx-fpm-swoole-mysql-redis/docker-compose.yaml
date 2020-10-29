@@ -1,0 +1,104 @@
+version: "3.8"
+
+services: 
+  nginx-fpm:
+    image: nginx
+    container_name: nginx-fpm
+    restart: always
+    volumes:
+      - "~/docker/nginx/conf.d/fpm/:/etc/nginx/conf.d"
+      - "~/docker/work/fpm/:/usr/share/nginx/html"
+    ports:
+      - "80:80"
+    depends_on:
+      - php-fpm
+    networks:
+      lnmp_net:
+        aliases:
+          - nginx-fpm
+
+  nginx-swoole:
+    image: nginx
+    container_name: nginx-swoole
+    restart: always
+    volumes:
+      - "~/docker/nginx/conf.d/swoole/:/etc/nginx/conf.d"
+      - "~/docker/work/swoole/html/:/usr/share/nginx/html"
+    ports:
+      - "800:800"
+    depends_on:
+      - php-swoole
+    networks:
+      lnmp_net: 
+        aliases:
+          - nginx-swoole
+
+  php-fpm:
+    image: php-swoole-redis-dockerfile:7.4-fpm
+    container_name: php-fpm
+    restart: always
+    volumes:
+      - "~/docker/work/fpm/:/var/www/html"
+      - "~/docker/php/php-fpm.conf/:/usr/local/etc/php-fpm.conf"
+      - "~/docker/php/php-fpm.d/:/usr/local/etc/php-fpm.d"
+    ports:
+      - "9000:9000"
+    depends_on: 
+      - mysql
+      - redis
+    networks:
+      lnmp_net:
+        aliases:
+          - php-fpm
+
+  php-swoole:
+    image: php-swoole-redis-dockerfile:7.4-fpm
+    container_name: php-swoole
+    restart: always
+    volumes:
+      - "~/docker/work/swoole/:/var/www/html"
+    ports:
+      - "9501:9501"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      lnmp_net:
+        aliases:
+          - php-swoole
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql5.7
+    restart: always
+    volumes:
+      - "~/docker/mysql/conf/conf.d/:/etc/mysql/conf.d"
+      - "~/docker/mysql/conf/mysql.conf.d/:/etc/mysql/mysql.conf.d"
+      - "~/docker/mysql/data/:/var/lib/mysql"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      lnmp_net:
+        aliases: 
+          - mysql5.7
+
+  redis:
+    image: redis:5.0.5
+    container_name: redis5.0.5
+    restart: always
+    volumes:
+      - "~/docker/redis/conf/redis.conf/:/etc/redis.conf"
+      - "~/docker/redis/data/:/data"
+    ports:
+      - "6379:6379"
+    command: /usr/local/bin/redis-server /etc/redis.conf --appendonly yes
+    networks:
+      lnmp_net:
+        aliases:
+          - redis5.0.5
+
+networks:
+  lnmp_net:
