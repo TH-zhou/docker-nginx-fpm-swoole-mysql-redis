@@ -12,3 +12,28 @@ mysql 用的是5.7的镜像，直接在docker中 docker pull mysql:5.7就行
 
 ## redis
 redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
+
+
+## 整体结构目录
+|-- docker
+    |-- compose
+    |   |-- dev
+    |   |   |-- nginx-fpm-swoole-mysql-redis
+    |   |   |   |-- docker-compose.yaml
+    |-- dockerfile
+    |   |-- php-swoole-redis
+    |   |   |-- Dockerfile
+    |   |   |-- redis-5.0.5.tgz
+    |   |   |-- swoole.tar.gz
+    |   |-- post.md
+    |-- mysql
+    |   |-- conf
+    |   |   |-- conf.d
+    |   |   |   |-- docker.cnf
+    |   |   |   |-- mysql.cnf
+    |   |   |   |-- mysqldump.cnf
+    |   |   |-- mysql.conf.d
+    |   |   |   |-- mysqld.cnf
+    |   |-- data
+    |   |   |-- mysql中对应的库、表文件
+    
