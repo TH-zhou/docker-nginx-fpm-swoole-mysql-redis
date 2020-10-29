@@ -13,6 +13,10 @@ mysql 用的是5.7的镜像，直接在docker中 docker pull mysql:5.7就行
 ## redis
 redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
 
+## 前期工作 重要
+把各镜像pull下来之后，docker run -itd --rm 镜像名 得到容器ID之后呢，把对应需要的配置文件及数据cp下来。docker cp 容器ID:/docker容器中的目录和文件 ./宿主机的目录或者文件
+一旦挂载之后呢，宿主机没有这些目录会自动创建，文件也是空白的，导致挂载过去会把docker中相应的配置文件也给同步掉，也变成空白文件
+
 
 ## 整体结构目录
 |-- docker
