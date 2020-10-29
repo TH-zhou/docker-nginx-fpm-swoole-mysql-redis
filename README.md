@@ -15,8 +15,8 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
 
 
 ## 整体结构目录
-|-- docker
 
+|-- docker
     |-- compose
     |   |-- dev
     |   |   |-- nginx-fpm-swoole-mysql-redis
