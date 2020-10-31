@@ -11,7 +11,7 @@ PHP 用的是7.4-fpm的镜像。其中自己在此基础上增加了composer、s
 mysql 用的是5.7的镜像，直接在docker中 docker pull mysql:5.7就行
 
 ## redis
-redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
+redis 用的是最新的镜像，直接在docker中 docker pull redis就行
 
 ## 前期工作 重要
 把各镜像pull下来之后，docker run -itd --rm 镜像名 得到容器ID之后呢，把对应需要的配置文件及数据cp下来。docker cp 容器ID:/docker容器中的目录和文件 ./宿主机的目录或者文件
@@ -34,9 +34,8 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
     |-- dockerfile
     |   |-- php-swoole-redis
     |   |   |-- Dockerfile
-    |   |   |-- redis-5.0.5.tgz
+    |   |   |-- redis-5.3.2.tgz
     |   |   |-- swoole.tar.gz
-    |   |-- post.md
     |-- mysql
     |   |-- conf
     |   |   |-- conf.d
@@ -49,10 +48,8 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
     |   |   |-- mysql中对应的库、表文件
     |-- nginx
     |   |-- conf.d
-    |   |   |-- fpm
-    |   |   |   |-- default.conf
-    |   |   |-- swoole
-    |   |   |   |-- default.conf
+    |   |   |-- fpm.conf
+    |   |   |-- swoole.conf
     |   |-- logs
     |   |-- nginx.conf
     |-- php
@@ -68,11 +65,9 @@ redis 用的是5.0.5的镜像，直接在docker中 docker pull redis:5.0.5就行
     |   |-- data
     |-- work
     |   |-- fpm
+    |   |   |-- phpinfo.php
+    |   |-- html
     |   |   |-- 50x.html
     |   |   |-- index.html
-    |   |   |-- phpinfo.php
     |   |-- swoole
-    |   |   |-- html
-    |   |   |   |-- 50x.html
-    |   |   |   |-- index.html
     |   |   |-- server.php
