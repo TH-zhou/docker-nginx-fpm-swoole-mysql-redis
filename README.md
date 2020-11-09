@@ -34,8 +34,6 @@ redis 用的是最新的镜像，直接在docker中 docker pull redis就行
     |-- dockerfile
     |   |-- php-swoole-redis
     |   |   |-- Dockerfile
-    |   |   |-- redis-5.3.2.tgz
-    |   |   |-- swoole.tar.gz
     |-- mysql
     |   |-- conf
     |   |   |-- conf.d
