@@ -7,6 +7,9 @@ MAINTAINER TH<1260597728@qq.com>
 # 设置环境变量
 ENV PHP_CONFIG=/usr/local/bin/php-config PHPIZE=/usr/local/bin/phpize REDIS_EXT=redis-5.3.2
 
+# 设置时区
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 # 安装必要命令工具
 RUN apt-get update \
     && apt-get install -y vim \
